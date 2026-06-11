@@ -1,16 +1,19 @@
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
+import FeaturedProducts from "@/components/FeaturedProducts";
+import Contact from "@/components/Contact";
+import About from "@/components/About";
 
 export default function Home() {
   return (
     <main>
 
-      <Navbar />
-
       <Hero />
 
-      <Footer />
+      <FeaturedProducts />
+
+      <About />
+
+      <Contact />
 
     </main>
   );

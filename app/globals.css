@@ -137,3 +137,36 @@ body {
   background: #ffffff;
   color: #111827;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #C9A227;
+  color: white;
+}
+
+body {
+  background: #ffffff;
+  color: #111827;
+}
+
+section {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.03em;
+}
+
+button,
+a {
+  transition: all 0.3s ease;
+}

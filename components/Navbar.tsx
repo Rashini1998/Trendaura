@@ -5,7 +5,7 @@ import Container from "./Container";
 
 export default function Navbar() {
   return (
-    <nav className="border-b bg-white">
+    <nav  className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <Container>
         <div className="flex h-20 items-center justify-between">
 
@@ -22,9 +22,9 @@ export default function Navbar() {
 
             <Link href="/products">Products</Link>
 
-            <Link href="#">About</Link>
+            <Link href="/#about">About</Link>
 
-            <Link href="#">Contact</Link>
+            <Link href="/#contact">Contact</Link>
 
           </div>
 
