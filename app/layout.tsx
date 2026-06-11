@@ -48,6 +48,8 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/Footer";
+import FloatingWhatsapp from "@/components/home/FloatingWhatsapp";
+import ScrollTop from "@/components/home/ScrollTop";
 
 export const metadata: Metadata = {
   title: "Trendaura",
@@ -70,6 +72,10 @@ export default function RootLayout({
         </main>
 
         <Footer />
+
+        <FloatingWhatsapp />
+
+        <ScrollTop />
 
       </body>
     </html>

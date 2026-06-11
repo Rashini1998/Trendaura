@@ -47,7 +47,7 @@ export default function Navbar() {
             <a
               href="https://wa.me/94710337335"
               target="_blank"
-              className="rounded-full bg-black px-5 py-2 text-white transition hover:bg-yellow-600"
+              className="rounded-full border bg-black px-5 py-2 text-white transition  hover:bg-white hover:text-black hover:border border-black"
             >
               WhatsApp
             </a>

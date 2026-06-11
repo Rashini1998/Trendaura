@@ -162,13 +162,12 @@ export default function ProductCard({ product }: Props) {
           href={`https://wa.me/94710337335?text=Hello Trendaura! I would like to order ${product.name}.`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 flex items-center justify-center gap-2 rounded-full bg-black py-4 text-white transition hover:bg-yellow-600"
+          className="mt-8 flex items-center justify-center gap-2 rounded-full bg-black py-4 text-white transition  hover:bg-white hover:text-black hover:border border-black"
         >
           <MessageCircle size={20} />
 
           Order via WhatsApp
         </a>
-
       </div>
     </motion.div>
   );
