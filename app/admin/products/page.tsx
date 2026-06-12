@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProducts } from "@/services/products";
+import { getProducts } from "@/lib/products";
 
 export default async function ProductsPage() {
   const products = await getProducts();

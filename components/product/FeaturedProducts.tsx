@@ -41,10 +41,11 @@
 //     );
 // }
 
-import { products } from "@/lib/products";
+import { getProducts  } from "@/lib/products";
 import ProductCard from "./ProductCard";
 
-export default function FeaturedProducts() {
+export default async function FeaturedProducts() {
+   const products = await getProducts();
   return (
     <section className="bg-gray-50 py-24">
 

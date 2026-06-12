@@ -38,4 +38,7 @@ export interface Product {
   sizes: string[];
   stock: number;
   available: boolean;
+  created_at?: string;
 }
+
+export type CreateProduct = Omit<Product, "id" | "created_at">;

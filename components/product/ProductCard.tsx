@@ -91,11 +91,21 @@ export default function ProductCard({ product }: Props) {
     >
       <div className="relative h-96 overflow-hidden">
 
-        <Image
+        {/* <Image
           src={product.image}
           alt={product.name}
           fill
           className="object-cover transition duration-500 hover:scale-110"
+        /> */}
+        <Image
+          src={
+            product.image && product.image.trim() !== ""
+              ? product.image
+              : "/images/placeholder.jpg"
+          }
+          alt={product.name}
+          fill
+          className="object-cover"
         />
 
         <div className="absolute right-4 top-4">
