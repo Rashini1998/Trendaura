@@ -47,7 +47,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 import FloatingWhatsapp from "@/components/home/FloatingWhatsapp";
 import ScrollTop from "@/components/home/ScrollTop";
 

@@ -4,9 +4,9 @@ import { useMemo, useState } from "react";
 
 import { products } from "@/lib/products";
 
-import ProductCard from "@/components/ProductCard";
-import SearchBar from "@/components/SearchBar";
-import CategoryFilter from "@/components/CategoryFilter";
+import ProductCard from "@/components/product/ProductCard";
+import SearchBar from "@/components/product/SearchBar";
+import CategoryFilter from "@/components/product/CategoryFilter";
 
 export default function ProductsPage() {
 

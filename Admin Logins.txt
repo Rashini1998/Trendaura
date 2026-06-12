@@ -1,0 +1,3 @@
+Username: admin@trendaura.com
+
+Password: admin123@trendaura
