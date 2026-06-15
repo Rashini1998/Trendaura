@@ -209,16 +209,33 @@ export async function createProduct(product: CreateProduct) {
   if (error) throw error;
 }
 
+// export async function updateProduct(
+//   id: number,
+//   product: Partial<Product>
+// ) {
+//   const { error } = await supabase
+//     .from("products")
+//     .update(product)
+//     .eq("id", id);
+
+//   if (error) throw error;
+// }
 export async function updateProduct(
   id: number,
   product: Partial<Product>
 ) {
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("products")
     .update(product)
-    .eq("id", id);
+    .eq("id", id)
+    .select();
 
-  if (error) throw error;
+  if (error) {
+    console.error("UPDATE ERROR:", error);
+    throw error;
+  }
+
+  return data;
 }
 
 export async function deleteProduct(id: number) {
@@ -244,5 +261,6 @@ export async function getNewArrivals(days: number = 30) {
 
   return data as Product[];
 }
+
 
 

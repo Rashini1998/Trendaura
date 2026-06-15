@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { getProducts } from "@/lib/products";
+// import { FaTrashAlt } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
+import DeleteButton from "@/components/admin/DeleteButton";
 
 export default async function ProductsPage() {
   const products = await getProducts();
@@ -40,11 +43,13 @@ export default async function ProductsPage() {
 
               <th className="p-4 text-left">Available</th>
 
+              <th className="p-4 text-left">Actions</th>
+
             </tr>
 
           </thead>
 
-          <tbody>
+          <tbody className="text-gray-700 ">
 
             {products?.map((product) => (
 
@@ -74,6 +79,23 @@ export default async function ProductsPage() {
                 <td className="p-4">
 
                   {product.available ? "Yes" : "No"}
+
+                </td>
+
+                <td className="p-2">
+
+                  <div className="flex gap-3">
+
+                    <Link
+                      href={`/admin/products/${product.id}/edit`}
+                      className="rounded-lg  px-4 py-2 text-white hover:bg-green-200"
+                    >
+                      <FaRegEdit className="text-black size-6 hover:text-green-600" />
+                    </Link>
+
+                    <DeleteButton id={product.id} />
+
+                  </div>
 
                 </td>
 

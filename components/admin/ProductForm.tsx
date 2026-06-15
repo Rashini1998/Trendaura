@@ -1,161 +1,154 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import ImageUploader from "./ImageUploader";
 import ColorSelector from "./ColorSelector";
 import SizeSelector from "./SizeSelector";
+import Image from "next/image";
 
-import { createProduct } from "@/lib/products";
+import {
+    createProduct,
+    updateProduct,
+} from "@/lib/products";
 
-import { useRouter } from "next/navigation";
+import { Product } from "@/types/product";
 
-export default function ProductForm() {
+interface Props {
+    product?: Product;
+}
+
+export default function ProductForm({ product }: Props) {
 
     const router = useRouter();
 
-    const [loading,setLoading]=useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const [image,setImage]=useState("");
 
-    const [colors,setColors]=useState<string[]>([]);
+    const [image, setImage] = useState(product?.image ?? "");
 
-    const [sizes,setSizes]=useState<string[]>([]);
+    const [colors, setColors] = useState<string[]>(
+        product?.colors ?? []
+    );
 
-    const [form,setForm]=useState({
+    const [sizes, setSizes] = useState<string[]>(
+        product?.sizes ?? []
+    );
 
-        name:"",
+    const [form, setForm] = useState({
 
-        description:"",
+        name: product?.name ?? "",
 
-        category:"",
+        description: product?.description ?? "",
 
-        price:0,
+        category: product?.category ?? "",
 
-        stock:0,
+        price: product?.price ?? 0,
 
-        available:true
+        stock: product?.stock ?? 0,
+
+        available: product?.available ?? true
 
     });
 
-    async function handleSubmit(e:React.FormEvent){
-
+    async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
         setLoading(true);
 
-        try{
-
-            await createProduct({
-
+        try {
+            const productData = {
                 ...form,
-
                 image,
-
                 colors,
+                sizes,
+            };
 
-                sizes
-
-            });
+            if (product) {
+                await updateProduct(product.id, productData);
+            } else {
+                await createProduct(productData);
+            }
 
             router.push("/admin/products");
-
-        }
-
-        catch(err){
-
+            router.refresh();
+        } catch (err) {
             alert("Unable to save product");
-
         }
 
         setLoading(false);
-
     }
-
-    return(
+    return (
 
         <form
 
-        onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
 
-        className="bg-white rounded-2xl shadow p-8 space-y-6"
+            className="bg-white rounded-2xl shadow p-8 space-y-6"
 
         >
-
             <input
-
-            placeholder="Product Name"
-
-            className="w-full border rounded-lg p-4"
-
-            onChange={(e)=>
-
-            setForm({...form,name:e.target.value})
-
-            }
-
+                value={form.name}
+                placeholder="Product Name"
+                className="w-full rounded-lg border p-4"
+                onChange={(e) =>
+                    setForm({
+                        ...form,
+                        name: e.target.value,
+                    })
+                }
             />
 
             <textarea
-
-            placeholder="Description"
-
-            className="w-full border rounded-lg p-4 h-36"
-
-            onChange={(e)=>
-
-            setForm({...form,description:e.target.value})
-
-            }
-
+                value={form.description}
+                placeholder="Description"
+                className="h-36 w-full rounded-lg border p-4"
+                onChange={(e) =>
+                    setForm({
+                        ...form,
+                        description: e.target.value,
+                    })
+                }
             />
 
             <input
-
-            placeholder="Category"
-
-            className="w-full border rounded-lg p-4"
-
-            onChange={(e)=>
-
-            setForm({...form,category:e.target.value})
-
-            }
-
+                value={form.category}
+                placeholder="Category"
+                className="w-full rounded-lg border p-4"
+                onChange={(e) =>
+                    setForm({
+                        ...form,
+                        category: e.target.value,
+                    })
+                }
             />
 
             <div className="grid grid-cols-2 gap-6">
-
                 <input
-
-                type="number"
-
-                placeholder="Price"
-
-                className="border rounded-lg p-4"
-
-                onChange={(e)=>
-
-                setForm({...form,price:Number(e.target.value)})
-
-                }
-
+                    type="number"
+                    value={form.price}
+                    placeholder="Price"
+                    className="rounded-lg border p-4"
+                    onChange={(e) =>
+                        setForm({
+                            ...form,
+                            price: Number(e.target.value),
+                        })
+                    }
                 />
 
                 <input
-
-                type="number"
-
-                placeholder="Stock"
-
-                className="border rounded-lg p-4"
-
-                onChange={(e)=>
-
-                setForm({...form,stock:Number(e.target.value)})
-
-                }
-
+                    type="number"
+                    value={form.stock}
+                    placeholder="Stock"
+                    className="rounded-lg border p-4"
+                    onChange={(e) =>
+                        setForm({
+                            ...form,
+                            stock: Number(e.target.value),
+                        })
+                    }
                 />
 
             </div>
@@ -163,23 +156,14 @@ export default function ProductForm() {
             <label className="flex gap-3 items-center">
 
                 <input
-
-                type="checkbox"
-
-                checked={form.available}
-
-                onChange={(e)=>
-
-                setForm({
-
-                    ...form,
-
-                    available:e.target.checked
-
-                })
-
-                }
-
+                    type="checkbox"
+                    checked={form.available}
+                    onChange={(e) =>
+                        setForm({
+                            ...form,
+                            available: e.target.checked,
+                        })
+                    }
                 />
 
                 Available
@@ -196,9 +180,9 @@ export default function ProductForm() {
 
                 <ColorSelector
 
-                value={colors}
+                    value={colors}
 
-                onChange={setColors}
+                    onChange={setColors}
 
                 />
 
@@ -214,9 +198,9 @@ export default function ProductForm() {
 
                 <SizeSelector
 
-                value={sizes}
+                    value={sizes}
 
-                onChange={setSizes}
+                    onChange={setSizes}
 
                 />
 
@@ -232,17 +216,29 @@ export default function ProductForm() {
 
                 <ImageUploader
 
-                onUploaded={setImage}
+                    onUploaded={setImage}
 
                 />
+                {image && (
+                    <div className="relative mt-4 h-40 w-40 overflow-hidden rounded-lg border">
+
+                        <Image
+                            src={image}
+                            alt="Product Preview"
+                            fill
+                            className="object-cover"
+                        />
+
+                    </div>
+                )}
 
             </div>
 
             <button
 
-            disabled={loading}
+                disabled={loading}
 
-            className="w-full bg-black text-white rounded-lg p-4 hover:bg-yellow-600 transition"
+                className="w-full bg-black text-white rounded-lg p-4 hover:bg-yellow-600 transition"
 
             >
 
@@ -250,13 +246,13 @@ export default function ProductForm() {
 
                     loading
 
-                    ?
+                        ?
 
-                    "Saving..."
+                        "Saving..."
 
-                    :
+                        :
 
-                    "Save Product"
+                        "Save Product"
 
                 }
 
