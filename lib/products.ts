@@ -230,3 +230,19 @@ export async function deleteProduct(id: number) {
   if (error) throw error;
 }
 
+export async function getNewArrivals(days: number = 30) {
+  const date = new Date();
+  date.setDate(date.getDate() - days);
+
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .gte("created_at", date.toISOString())
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+
+  return data as Product[];
+}
+
+

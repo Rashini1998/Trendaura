@@ -45,6 +45,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FaArrowCircleDown } from "react-icons/fa";
 
 export default function Hero() {
   return (
@@ -119,7 +120,8 @@ export default function Hero() {
 
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white">
 
-        ↓
+        {/* ↓ */}
+        <FaArrowCircleDown size={30} />
 
       </div>
 
