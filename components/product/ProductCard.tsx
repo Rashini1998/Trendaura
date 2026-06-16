@@ -89,14 +89,7 @@ export default function ProductCard({ product }: Props) {
       transition={{ duration: 0.25 }}
       className="overflow-hidden rounded-3xl border bg-white shadow-sm hover:shadow-2xl"
     >
-      <div className="relative h-96 overflow-hidden">
-
-        {/* <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className="object-cover transition duration-500 hover:scale-110"
-        /> */}
+      <div className="relative h-96  overflow-hidden">
         <Image
           src={
             product.image && product.image.trim() !== ""
@@ -110,15 +103,15 @@ export default function ProductCard({ product }: Props) {
 
         <div className="absolute right-4 top-4">
 
-          {product.available ? (
+          {product.stock > 0 ? (
 
-            <span className="rounded-full bg-green-600 px-4 py-2 text-sm text-white">
+            <span className="rounded-full bg-green-600 px-4 py-2 text-sm text-white  border-2">
               In Stock
             </span>
 
           ) : (
 
-            <span className="rounded-full bg-red-600 px-4 py-2 text-sm text-white">
+            <span className="rounded-full bg-red-600 px-4 py-2 text-sm text-white border-2">
               Out of Stock
             </span>
 
@@ -134,15 +127,15 @@ export default function ProductCard({ product }: Props) {
           {product.name}
         </h3>
 
-        <p className="mt-2 text-gray-500">
+        <p className="mt-1 text-gray-500">
           {product.description}
         </p>
 
-        <p className="mt-5 text-3xl font-bold">
+        <p className="mt-4 text-xl font-bold">
           Rs. {product.price.toLocaleString()}
         </p>
 
-        <div className="mt-6 flex gap-2">
+        <div className="mt-4 flex gap-2">
 
           {product.colors.map((color) => (
             <span
@@ -155,7 +148,7 @@ export default function ProductCard({ product }: Props) {
 
         </div>
 
-        <div className="mt-4 flex gap-2">
+        <div className="mt-3 flex gap-2">
 
           {product.sizes.map((size) => (
             <span
@@ -172,7 +165,7 @@ export default function ProductCard({ product }: Props) {
           href={`https://wa.me/94710337335?text=Hello Trendaura! I would like to order ${product.name}.`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 flex items-center justify-center gap-2 rounded-full bg-black py-4 text-white transition  hover:bg-white hover:text-black hover:border border-black"
+          className="mt-4 flex items-center justify-center gap-2 rounded-full bg-black py-4 text-white transition  hover:bg-white hover:text-black hover:border border-black"
         >
           <MessageCircle size={20} />
 
